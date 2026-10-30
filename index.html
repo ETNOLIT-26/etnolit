@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="id" style="--hero-img:url('assets/bjm.jpg');">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ETNOLIT adalah aplikasi pembelajaran IPS SMP berbasis Kurikulum Merdeka yang mengintegrasikan kearifan lokal Banjar.">
+  <title>Beranda | ETNOLIT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container nav">
+    <a class="logo" href="index.html"><span class="logo-mark">◎</span><span>ETNOLIT</span></a>
+    <button class="mobile-toggle" aria-label="Buka menu">☰</button>
+    <nav class="menu">
+      <a class="active" href="index.html">Beranda</a>
+      <a href="rumah-adat.html">Rumah Adat</a>
+      <a href="aktivitas-sungai.html">Aktivitas Sungai</a>
+      <a href="pertanian.html">Pertanian</a>
+      <a href="perahu.html">Perahu</a>
+      <a href="virtual-tour.html">Virtual Tour</a>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+  <section class="hero">
+    <video autoplay muted loop playsinline id="hero-video-bg" style="
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:1;
+    ">
+      <source src="assets/video/banjarmasin.mp4" type="video/mp4">
+    </video>
+
+    <div class="container hero-content" style="position:relative; z-index:2; padding-left:32px; padding-right:32px; text-align:left;">
+      <span class="badge">Untuk Siswa SMP • IPS Kurikulum Merdeka</span>
+      <h1>ETNOLIT</h1>
+      <h2>Pembelajaran IPS Berbasis Etno-Tekno-Pedagogik</h2>
+      <p>
+        ETNOLIT membantu siswa memahami materi IPS melalui contoh nyata:
+        rumah adat, aktivitas kehidupan sungai, pertanian lahan pasang surut, dan perahu tradisional.
+        Siswa dapat membaca materi, melihat foto lapangan, menonton video, mengerjakan kuis,
+        membuat proyek, dan mengikuti virtual tour pembelajaran.
+      </p>
+      <div class="actions">
+        <a class="btn orange" href="#topik">Mulai Belajar</a>
+        <a class="btn blue" href="#cara">Cara Belajar</a>
+        <a class="btn orange" href="virtual-tour.html">Virtual Tour</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip" id="cara">
+    <div class="container features">
+      <article class="feature">
+        <div class="feature-icon">📖</div>
+        <div>
+          <h3>Materi Ringkas</h3>
+          <p>Bahasa mudah untuk siswa SMP.</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">🖼️</div>
+        <div>
+          <h3>Foto Lapangan</h3>
+          <p>Belajar dari dokumentasi nyata.</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">🧭</div>
+        <div>
+          <h3>Virtual Tour</h3>
+          <p>Jelajah materi secara interaktif.</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="feature-icon">🧩</div>
+        <div>
+          <h3>Kuis & Proyek</h3>
+          <p>Cek pemahaman dan buat karya.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container grid-2">
+      <div class="box">
+        <span class="badge">Fitur Baru</span>
+        <h3>Virtual Tour Kearifan Lokal Banjar</h3>
+        <p>
+          Siswa dapat menjelajahi empat materi utama dalam satu halaman interaktif:
+          aktivitas sungai, perahu tradisional, rumah adat Banjar, dan pertanian lahan pasang surut.
+          Fitur ini membantu siswa memahami hubungan antara lingkungan, budaya, teknologi lokal,
+          dan kegiatan ekonomi masyarakat Banjar.
+        </p>
+        <ul>
+          <li>Memiliki tampilan jelajah virtual dengan titik tour.</li>
+          <li>Berisi pertanyaan pengamatan pada setiap lokasi.</li>
+          <li>Dilengkapi kuis, refleksi, dan proyek mini.</li>
+        </ul>
+        <a class="btn orange" href="virtual-tour.html">Masuk Virtual Tour</a>
+      </div>
+
+      <div class="box">
+        <h3>Alur Virtual Tour</h3>
+        <div class="concept-flow">
+          <div class="flow-step">Sungai</div>
+          <div class="flow-step">Perahu</div>
+          <div class="flow-step">Rumah Adat</div>
+          <div class="flow-step">Pertanian</div>
+          <div class="flow-step">Kesimpulan</div>
+        </div>
+        <div class="ref-box">
+          Gunakan Virtual Tour setelah siswa mengenal topik utama, atau gunakan di awal pembelajaran
+          sebagai pemantik sebelum membaca materi lengkap.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="topik">
+    <div class="container">
+      <div class="section-title"><h2>Pilih Topik Belajar</h2><span class="line"></span></div>
+      <p class="lead">Setiap topik menghubungkan konsep IPS dengan kehidupan lokal masyarakat Banjar.</p>
+
+      <div class="grid-4">
+        <article class="card">
+          <img src="assets/rumah/rumah_29.jpg" alt="Rumah adat Banjar">
+          <div class="card-body">
+            <span class="badge">Literasi Budaya</span>
+            <h3>Rumah Adat Banjar</h3>
+            <p>Mengenal rumah Banjar, bentuk rumah panggung, fungsi ruang, filosofi, dan adaptasi terhadap lingkungan.</p>
+            <a class="btn small orange" href="rumah-adat.html">Buka Materi</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/sungai/sungai_07.jpeg" alt="Aktivitas kehidupan sungai">
+          <div class="card-body">
+            <span class="badge">Literasi Lingkungan</span>
+            <h3>Aktivitas Sungai</h3>
+            <p>Memahami peran sungai sebagai ruang hidup, transportasi, ekonomi, dan lingkungan yang perlu dijaga.</p>
+            <a class="btn small blue" href="aktivitas-sungai.html">Buka Materi</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/pertanian/pertanian_05.jpg" alt="Pertanian lahan pasang surut">
+          <div class="card-body">
+            <span class="badge">Literasi Ekonomi</span>
+            <h3>Pertanian Pasang Surut</h3>
+            <p>Belajar cara petani beradaptasi dengan air, alat tradisional, dan proses produksi pertanian.</p>
+            <a class="btn small green" href="pertanian.html">Buka Materi</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/perahu/perahu_16.jpg" alt="Perahu tradisional Banjar">
+          <div class="card-body">
+            <span class="badge">Teknologi Lokal</span>
+            <h3>Perahu Tradisional</h3>
+            <p>Mengenal perahu sebagai alat transportasi, perdagangan, dan teknologi lokal masyarakat sungai.</p>
+            <a class="btn small orange" href="perahu.html">Buka Materi</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/sungai/sungai_01.jpg" alt="Virtual tour kearifan lokal Banjar">
+          <div class="card-body">
+            <span class="badge">Jelajah Interaktif</span>
+            <h3>Virtual Tour</h3>
+            <p>Menjelajahi materi sungai, perahu, rumah adat, dan pertanian dalam satu halaman interaktif.</p>
+            <a class="btn small blue" href="virtual-tour.html">Mulai Tour</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container grid-2">
+      <div class="box">
+        <h3>Tujuan Aplikasi</h3>
+        <p>
+          ETNOLIT dibuat agar siswa tidak hanya menghafal IPS, tetapi melihat contoh langsung dari
+          lingkungan sekitar. Budaya lokal menjadi seperti jembatan: dari kehidupan sehari-hari
+          menuju konsep pelajaran.
+        </p>
+        <ul>
+          <li>Mengaitkan Kurikulum Merdeka dengan konteks lokal Banjar.</li>
+          <li>Membantu siswa memahami budaya, lingkungan, ekonomi, dan teknologi lokal.</li>
+          <li>Mendorong belajar aktif melalui virtual tour, kuis, dan proyek.</li>
+        </ul>
+      </div>
+
+      <div class="box">
+        <h3>Alur Belajar Siswa</h3>
+        <ul>
+          <li>Pilih topik yang ingin dipelajari.</li>
+          <li>Baca materi inti dengan bahasa sederhana.</li>
+          <li>Amati galeri foto lapangan.</li>
+          <li>Ikuti virtual tour untuk melihat hubungan antar topik.</li>
+          <li>Kerjakan kuis dan proyek mini.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<section class="footer-cta">
+  <div class="container">
+    <div>
+      <h2 style="margin:0 0 6px;font-size:30px">Belajar IPS lewat budaya dan lingkungan Banjar</h2>
+      <p style="margin:0;font:16px/1.7 Arial,sans-serif">
+        Materi, foto, video, virtual tour, kuis, dan proyek mini disusun untuk siswa SMP.
+      </p>
+    </div>
+    <a class="btn orange" href="virtual-tour.html">Mulai Virtual Tour</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div>© <span data-year></span> ETNOLIT | Aplikasi Pembelajaran IPS SMP</div>
+    <div>Rumah Adat • Aktivitas Sungai • Pertanian • Perahu Tradisional • Virtual Tour</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
