@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Virtual Tour ETNOLIT untuk menjelajahi materi aktivitas sungai, perahu tradisional, rumah adat Banjar, dan pertanian lahan pasang surut.">
+  <title>Virtual Tour Kearifan Lokal Banjar | ETNOLIT</title>
+
+  <style>
+    :root{
+      --bg:#081b2d;
+      --bg2:#0e2f48;
+      --card:#ffffff;
+      --soft:#f3f8fb;
+      --text:#10212f;
+      --muted:#607485;
+      --line:#d7e6ee;
+      --primary:#0f6b7a;
+      --primary2:#17a2a8;
+      --orange:#f28a2e;
+      --yellow:#ffd166;
+      --green:#3aa76d;
+      --shadow:0 20px 55px rgba(0,0,0,.18);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(23,162,168,.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(242,138,46,.18), transparent 30%),
+        #eef6f8;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    .vt-container{
+      width:min(1180px, calc(100% - 34px));
+      margin:auto;
+    }
+
+    .vt-topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(8,27,45,.86);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+
+    .vt-nav{
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .vt-logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:white;
+      font-weight:800;
+      letter-spacing:.5px;
+      font-size:20px;
+    }
+
+    .vt-logo-mark{
+      width:38px;
+      height:38px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg, var(--primary2), var(--orange));
+      color:white;
+      box-shadow:0 10px 24px rgba(0,0,0,.2);
+    }
+
+    .vt-menu{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .vt-menu a{
+      color:rgba(255,255,255,.82);
+      font-size:14px;
+      padding:10px 12px;
+      border-radius:999px;
+      transition:.2s;
+    }
+
+    .vt-menu a:hover,
+    .vt-menu a.active{
+      background:rgba(255,255,255,.13);
+      color:white;
+    }
+
+    .vt-hero{
+      position:relative;
+      min-height:640px;
+      color:white;
+      overflow:hidden;
+      background:
+        linear-gradient(120deg, rgba(8,27,45,.94), rgba(8,27,45,.62)),
+        url('assets/sungai/sungai_04.jpeg') center/cover no-repeat;
+    }
+
+    .vt-hero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:180px;
+      background:linear-gradient(to bottom, transparent, #eef6f8);
+      pointer-events:none;
+    }
+
+    .vt-hero-inner{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:36px;
+      align-items:center;
+      padding:76px 0 110px;
+    }
+
+    .vt-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      color:#eaffff;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .vt-hero h1{
+      margin:18px 0 16px;
+      font-size:clamp(38px, 6vw, 74px);
+      line-height:.98;
+      letter-spacing:-2px;
+    }
+
+    .vt-hero p{
+      margin:0;
+      max-width:680px;
+      color:rgba(255,255,255,.88);
+      font-size:18px;
+      line-height:1.75;
+    }
+
+    .vt-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .vt-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding:13px 18px;
+      font-weight:800;
+      font-size:14px;
+      transition:.22s;
+    }
+
+    .vt-btn.primary{
+      background:linear-gradient(135deg, var(--orange), #ffb15d);
+      color:#1e1207;
+      box-shadow:0 16px 28px rgba(242,138,46,.3);
+    }
+
+    .vt-btn.secondary{
+      background:rgba(255,255,255,.13);
+      color:white;
+      border:1px solid rgba(255,255,255,.22);
+    }
+
+    .vt-btn:hover{transform:translateY(-2px)}
+
+    .vt-hero-panel{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      border-radius:32px;
+      padding:22px;
+    }
+
+    .vt-mini-map{
+      position:relative;
+      min-height:360px;
+      border-radius:26px;
+      overflow:hidden;
+      background:
+        linear-gradient(135deg, rgba(8,27,45,.28), rgba(15,107,122,.28)),
+        url('assets/sungai/sungai_04.jpeg') center/cover no-repeat;
+    }
+
+    .vt-mini-map::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(8,27,45,.72), rgba(8,27,45,.08)),
+        radial-gradient(circle at 75% 20%, rgba(255,209,102,.45), transparent 22%);
+    }
+
+    .vt-map-title{
+      position:absolute;
+      left:20px;
+      top:18px;
+      right:20px;
+      z-index:2;
+    }
+
+    .vt-map-title h3{
+      margin:0 0 6px;
+      font-size:23px;
+      color:white;
+    }
+
+    .vt-map-title p{
+      font-size:14px;
+      line-height:1.55;
+      color:rgba(255,255,255,.84);
+    }
+
+    .vt-pin{
+      position:absolute;
+      z-index:3;
+      display:grid;
+      place-items:center;
+      width:46px;
+      height:46px;
+      border-radius:18px 18px 18px 4px;
+      transform:rotate(-45deg);
+      background:linear-gradient(135deg, var(--orange), var(--yellow));
+      color:#1d1307;
+      font-weight:900;
+      box-shadow:0 12px 24px rgba(0,0,0,.28);
+      border:3px solid rgba(255,255,255,.88);
+      cursor:pointer;
+    }
+
+    .vt-pin span{
+      transform:rotate(45deg);
+      display:block;
+    }
+
+    .vt-pin.s1{left:15%;bottom:18%}
+    .vt-pin.s2{left:39%;bottom:37%}
+    .vt-pin.s3{right:28%;bottom:24%}
+    .vt-pin.s4{right:12%;top:33%}
+
+    .vt-section{
+      padding:72px 0;
+    }
+
+    .vt-section-title{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:24px;
+    }
+
+    .vt-section-title h2{
+      margin:0;
+      font-size:clamp(28px, 3.6vw, 46px);
+      letter-spacing:-1px;
+      color:#0b2235;
+    }
+
+    .vt-section-title p{
+      margin:0;
+      max-width:520px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .vt-route{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .vt-route-card{
+      position:relative;
+      overflow:hidden;
+      min-height:210px;
+      padding:22px;
+      border-radius:var(--radius);
+      color:white;
+      box-shadow:0 18px 45px rgba(20,56,74,.16);
+      background:#123;
+      isolation:isolate;
+    }
+
+    .vt-route-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom, rgba(8,27,45,.18), rgba(8,27,45,.86));
+      z-index:-1;
+    }
+
+    .vt-route-card.sungai{background:url('assets/sungai/sungai_04.jpeg') center/cover no-repeat}
+    .vt-route-card.perahu{background:url('assets/perahu/perahu_16.jpg') center/cover no-repeat}
+    .vt-route-card.rumah{background:url('assets/rumah/rumah_30.jpg') center/cover no-repeat}
+    .vt-route-card.pertanian{background:url('assets/pertanian/pertanian_11.jpg') center/cover no-repeat}
+
+    .vt-number{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border-radius:15px;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.22);
+      font-weight:900;
+    }
+
+    .vt-route-card h3{
+      margin:52px 0 8px;
+      font-size:22px;
+    }
+
+    .vt-route-card p{
+      margin:0;
+      color:rgba(255,255,255,.84);
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    .vt-tour-shell{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .vt-viewer{
+      overflow:hidden;
+      border-radius:32px;
+      background:white;
+      box-shadow:var(--shadow);
+      min-height:560px;
+      display:grid;
+      grid-template-rows:1fr auto;
+    }
+
+    .vt-panorama{
+      position:relative;
+      min-height:410px;
+      background:url('assets/sungai/sungai_04.jpeg') center/cover no-repeat;
+      transition:.35s ease;
+    }
+
+    .vt-panorama::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to bottom, rgba(8,27,45,.05), rgba(8,27,45,.75)),
+        radial-gradient(circle at 70% 24%, rgba(255,209,102,.35), transparent 18%);
+    }
+
+    .vt-panorama-label{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:24px;
+      color:white;
+      z-index:3;
+    }
+
+    .vt-panorama-label span{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.22);
+      font-weight:800;
+      font-size:13px;
+      margin-bottom:10px;
+    }
+
+    .vt-panorama-label h2{
+      margin:0;
+      font-size:clamp(27px, 4vw, 44px);
+      letter-spacing:-1px;
+    }
+
+    .vt-hotspot{
+      position:absolute;
+      z-index:4;
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:var(--yellow);
+      display:grid;
+      place-items:center;
+      color:#241704;
+      font-weight:900;
+      box-shadow:0 0 0 10px rgba(255,209,102,.25);
+      cursor:pointer;
+      animation:pulse 1.8s infinite;
+    }
+
+    .vt-hotspot.h1{left:20%;top:44%}
+    .vt-hotspot.h2{right:26%;top:32%}
+    .vt-hotspot.h3{left:52%;bottom:32%}
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,209,102,.42)}
+      70%{box-shadow:0 0 0 18px rgba(255,209,102,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,209,102,0)}
+    }
+
+    .vt-viewer-body{
+      padding:24px;
+      background:white;
+    }
+
+    .vt-viewer-body p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .vt-tag-list{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .vt-tag{
+      padding:7px 10px;
+      border-radius:999px;
+      background:#e9f5f6;
+      color:#0d6673;
+      font-weight:800;
+      font-size:12px;
+    }
+
+    .vt-side-panel{
+      background:white;
+      border-radius:32px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .vt-stop-tabs{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      padding:18px;
+      background:#f5fafb;
+      border-bottom:1px solid var(--line);
+    }
+
+    .vt-stop-btn{
+      border:0;
+      border-radius:16px;
+      padding:13px 10px;
+      cursor:pointer;
+      background:white;
+      color:var(--text);
+      font-weight:900;
+      box-shadow:0 8px 20px rgba(15,107,122,.08);
+      transition:.2s;
+    }
+
+    .vt-stop-btn.active{
+      background:linear-gradient(135deg, var(--primary), var(--primary2));
+      color:white;
+    }
+
+    .vt-info{
+      padding:24px;
+    }
+
+    .vt-info h3{
+      margin:0 0 10px;
+      font-size:26px;
+      color:#0b2235;
+    }
+
+    .vt-info p{
+      margin:0 0 18px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .vt-question-box{
+      background:#fff7ed;
+      border:1px solid #ffd8a7;
+      padding:18px;
+      border-radius:20px;
+      margin-top:16px;
+    }
+
+    .vt-question-box h4{
+      margin:0 0 10px;
+      color:#7a3e05;
+    }
+
+    .vt-question-box ul{
+      margin:0;
+      padding-left:19px;
+      color:#694014;
+      line-height:1.65;
+    }
+
+    .vt-panel-actions{
+      display:flex;
+      gap:10px;
+      padding:0 24px 24px;
+      margin-top:auto;
+    }
+
+    .vt-small-btn{
+      flex:1;
+      border:0;
+      border-radius:16px;
+      padding:13px 10px;
+      font-weight:900;
+      cursor:pointer;
+      background:#e9f5f6;
+      color:#0b6472;
+    }
+
+    .vt-small-btn.main{
+      background:linear-gradient(135deg, var(--orange), #ffba6d);
+      color:#231403;
+    }
+
+    .vt-compare{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .vt-compare-card{
+      background:white;
+      border-radius:24px;
+      box-shadow:0 16px 38px rgba(12,49,70,.12);
+      overflow:hidden;
+    }
+
+    .vt-compare-card img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .vt-compare-card div{
+      padding:18px;
+    }
+
+    .vt-compare-card h3{
+      margin:0 0 8px;
+      font-size:19px;
+    }
+
+    .vt-compare-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .vt-quiz-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .vt-quiz-card{
+      background:white;
+      border-radius:24px;
+      box-shadow:0 16px 38px rgba(12,49,70,.12);
+      padding:22px;
+    }
+
+    .vt-quiz-card h3{
+      margin:0 0 16px;
+      font-size:18px;
+      line-height:1.45;
+    }
+
+    .vt-option{
+      display:block;
+      width:100%;
+      border:1px solid var(--line);
+      background:#f9fcfd;
+      border-radius:15px;
+      padding:12px 14px;
+      margin:8px 0;
+      text-align:left;
+      cursor:pointer;
+      font-weight:700;
+      color:#243b4b;
+      transition:.2s;
+    }
+
+    .vt-option:hover{
+      border-color:var(--primary2);
+      transform:translateX(3px);
+    }
+
+    .vt-option.correct{
+      background:#e8f8ef;
+      border-color:#75c99a;
+      color:#1e6b43;
+    }
+
+    .vt-option.wrong{
+      background:#fff0f0;
+      border-color:#f0a0a0;
+      color:#9c2b2b;
+    }
+
+    .vt-result{
+      margin-top:10px;
+      font-weight:900;
+      min-height:20px;
+    }
+
+    .vt-reflection{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:24px;
+      background:linear-gradient(135deg, #0b2a42, #0e6572);
+      color:white;
+      border-radius:32px;
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+
+    .vt-reflection h2{
+      margin:0 0 10px;
+      font-size:34px;
+    }
+
+    .vt-reflection p{
+      margin:0;
+      color:rgba(255,255,255,.82);
+      line-height:1.7;
+    }
+
+    .vt-reflection ol{
+      margin:0;
+      padding-left:20px;
+      color:rgba(255,255,255,.92);
+      line-height:1.85;
+    }
+
+    .vt-projects{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .vt-project-card{
+      background:white;
+      border-radius:24px;
+      box-shadow:0 16px 38px rgba(12,49,70,.12);
+      padding:24px;
+      border-top:6px solid var(--orange);
+    }
+
+    .vt-project-card h3{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+
+    .vt-project-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .vt-project-card ol{
+      margin:0;
+      padding-left:19px;
+      line-height:1.75;
+      color:#344b5b;
+    }
+
+    .vt-footer-cta{
+      padding:50px 0;
+      background:#081b2d;
+      color:white;
+    }
+
+    .vt-footer-flex{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .vt-footer-cta h2{
+      margin:0 0 8px;
+      font-size:30px;
+    }
+
+    .vt-footer-cta p{
+      margin:0;
+      color:rgba(255,255,255,.75);
+      line-height:1.7;
+    }
+
+    .vt-footer{
+      background:#05111d;
+      color:rgba(255,255,255,.72);
+      padding:22px 0;
+      font-size:14px;
+    }
+
+    .vt-footer .vt-container{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:980px){
+      .vt-hero-inner,
+      .vt-tour-shell,
+      .vt-reflection{
+        grid-template-columns:1fr;
+      }
+
+      .vt-route,
+      .vt-compare,
+      .vt-projects{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .vt-menu{
+        display:none;
+      }
+    }
+
+    @media (max-width:620px){
+      .vt-container{
+        width:min(100% - 22px, 1180px);
+      }
+
+      .vt-hero{
+        min-height:auto;
+      }
+
+      .vt-hero-inner{
+        padding:46px 0 90px;
+      }
+
+      .vt-route,
+      .vt-compare,
+      .vt-projects,
+      .vt-quiz-grid{
+        grid-template-columns:1fr;
+      }
+
+      .vt-tour-shell{
+        gap:16px;
+      }
+
+      .vt-panorama{
+        min-height:340px;
+      }
+
+      .vt-footer-flex{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="vt-topbar">
+  <div class="vt-container vt-nav">
+    <a class="vt-logo" href="index.html">
+      <span class="vt-logo-mark">◎</span>
+      <span>ETNOLIT</span>
+    </a>
+
+    <nav class="vt-menu">
+      <a href="index.html">Beranda</a>
+      <a href="aktivitas-sungai.html">Aktivitas Sungai</a>
+      <a href="perahu.html">Perahu</a>
+      <a href="rumah-adat.html">Rumah Adat</a>
+      <a href="pertanian.html">Pertanian</a>
+      <a class="active" href="virtual-tour-desain.html">Virtual Tour</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="vt-hero">
+    <div class="vt-container vt-hero-inner">
+      <div>
+        <span class="vt-badge">✦ IPS Kelas VIII • Jelajah Interaktif</span>
+        <h1>Virtual Tour Kearifan Lokal Banjar</h1>
+        <p>
+          Jelajahi kehidupan masyarakat Banjar melalui empat titik utama: sungai, perahu tradisional,
+          rumah adat, dan pertanian lahan pasang surut. Halaman ini dibuat seperti perjalanan belajar
+          agar siswa dapat mengamati, memahami, bertanya, dan menyimpulkan materi secara lebih menarik.
+        </p>
+
+        <div class="vt-actions">
+          <a class="vt-btn primary" href="#mulai-tour">Mulai Tour Sekarang</a>
+          <a class="vt-btn secondary" href="#kuis-tour">Kerjakan Kuis</a>
+        </div>
+      </div>
+
+      <div class="vt-hero-panel">
+        <div class="vt-mini-map">
+          <div class="vt-map-title">
+            <h3>Peta Jelajah</h3>
+            <p>Klik titik pada peta untuk memulai pengamatan virtual.</p>
+          </div>
+          <a class="vt-pin s1" href="#mulai-tour" data-map="0"><span>1</span></a>
+          <a class="vt-pin s2" href="#mulai-tour" data-map="1"><span>2</span></a>
+          <a class="vt-pin s3" href="#mulai-tour" data-map="2"><span>3</span></a>
+          <a class="vt-pin s4" href="#mulai-tour" data-map="3"><span>4</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section">
+    <div class="vt-container">
+      <div class="vt-section-title">
+        <h2>Rute Perjalanan</h2>
+        <p>
+          Tour dimulai dari sungai sebagai ruang hidup, lalu berlanjut ke perahu, rumah adat,
+          dan pertanian sebagai contoh hubungan manusia dengan lingkungan.
+        </p>
+      </div>
+
+      <div class="vt-route">
+        <article class="vt-route-card sungai">
+          <div class="vt-number">01</div>
+          <h3>Aktivitas Sungai</h3>
+          <p>Sungai sebagai ruang sosial, ekonomi, transportasi, dan konektivitas masyarakat.</p>
+        </article>
+
+        <article class="vt-route-card perahu">
+          <div class="vt-number">02</div>
+          <h3>Perahu Banjar</h3>
+          <p>Perahu sebagai teknologi lokal untuk transportasi, perdagangan, dan distribusi.</p>
+        </article>
+
+        <article class="vt-route-card rumah">
+          <div class="vt-number">03</div>
+          <h3>Rumah Adat</h3>
+          <p>Rumah panggung sebagai adaptasi masyarakat terhadap sungai dan lahan basah.</p>
+        </article>
+
+        <article class="vt-route-card pertanian">
+          <div class="vt-number">04</div>
+          <h3>Pertanian</h3>
+          <p>Pertanian pasang surut sebagai contoh adaptasi dan ekonomi agrikultur.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section" id="mulai-tour">
+    <div class="vt-container">
+      <div class="vt-section-title">
+        <h2>Ruang Jelajah Virtual</h2>
+        <p>
+          Pilih titik tour untuk mengganti tampilan utama. Gunakan tombol berikutnya untuk mengikuti
+          alur perjalanan secara berurutan.
+        </p>
+      </div>
+
+      <div class="vt-tour-shell">
+        <div class="vt-viewer">
+          <div class="vt-panorama" id="tourImage">
+            <button class="vt-hotspot h1" type="button" title="Titik pengamatan">?</button>
+            <button class="vt-hotspot h2" type="button" title="Titik pengamatan">?</button>
+            <button class="vt-hotspot h3" type="button" title="Titik pengamatan">?</button>
+
+            <div class="vt-panorama-label">
+              <span id="tourBadge">Stop 1</span>
+              <h2 id="tourTitle">Aktivitas Kehidupan Sungai</h2>
+            </div>
+          </div>
+
+          <div class="vt-viewer-body">
+            <p id="tourDesc">
+              Sungai menjadi ruang hidup masyarakat Banjar. Di sekitar sungai, masyarakat dapat
+              melakukan aktivitas sosial, ekonomi, transportasi, dan interaksi antarruang.
+            </p>
+            <div class="vt-tag-list" id="tourTags">
+              <span class="vt-tag">sungai</span>
+              <span class="vt-tag">konektivitas</span>
+              <span class="vt-tag">ekonomi</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="vt-side-panel">
+          <div class="vt-stop-tabs">
+            <button class="vt-stop-btn active" type="button" data-stop="0">Sungai</button>
+            <button class="vt-stop-btn" type="button" data-stop="1">Perahu</button>
+            <button class="vt-stop-btn" type="button" data-stop="2">Rumah</button>
+            <button class="vt-stop-btn" type="button" data-stop="3">Pertanian</button>
+          </div>
+
+          <div class="vt-info">
+            <h3 id="infoTitle">Apa yang diamati?</h3>
+            <p id="infoText">
+              Amati fungsi sungai dalam kehidupan masyarakat. Sungai dapat menjadi jalur transportasi,
+              tempat interaksi sosial, dan ruang kegiatan ekonomi.
+            </p>
+
+            <div class="vt-question-box">
+              <h4>Pertanyaan Pengamatan</h4>
+              <ul id="tourQuestions">
+                <li>Apa saja aktivitas masyarakat di sekitar sungai?</li>
+                <li>Mengapa sungai dapat disebut jalur konektivitas?</li>
+                <li>Apa dampaknya jika sungai tercemar?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="vt-panel-actions">
+            <button class="vt-small-btn" id="prevBtn" type="button">Sebelumnya</button>
+            <button class="vt-small-btn main" id="nextBtn" type="button">Berikutnya</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section">
+    <div class="vt-container">
+      <div class="vt-section-title">
+        <h2>Perbandingan Materi</h2>
+        <p>
+          Keempat topik saling berkaitan. Siswa dapat membandingkan peran lingkungan, budaya,
+          teknologi lokal, dan kegiatan ekonomi dari setiap materi.
+        </p>
+      </div>
+
+      <div class="vt-compare">
+        <article class="vt-compare-card">
+          <img src="assets/sungai/sungai_04.jpeg" alt="Aktivitas sungai">
+          <div>
+            <h3>Sungai</h3>
+            <p>Ruang hidup, jalur transportasi, sumber daya perairan, dan pusat interaksi masyarakat.</p>
+          </div>
+        </article>
+
+        <article class="vt-compare-card">
+          <img src="assets/perahu/perahu_16.jpg" alt="Perahu tradisional">
+          <div>
+            <h3>Perahu</h3>
+            <p>Teknologi lokal untuk mobilitas, distribusi barang, dan perdagangan masyarakat sungai.</p>
+          </div>
+        </article>
+
+        <article class="vt-compare-card">
+          <img src="assets/rumah/rumah_30.jpg" alt="Rumah adat Banjar">
+          <div>
+            <h3>Rumah Adat</h3>
+            <p>Bangunan budaya yang menunjukkan adaptasi terhadap sungai, rawa, dan lahan basah.</p>
+          </div>
+        </article>
+
+        <article class="vt-compare-card">
+          <img src="assets/pertanian/pertanian_11.jpg" alt="Pertanian pasang surut">
+          <div>
+            <h3>Pertanian</h3>
+            <p>Kegiatan agrikultur yang menyesuaikan diri dengan kondisi pasang surut air.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section" id="kuis-tour">
+    <div class="vt-container">
+      <div class="vt-section-title">
+        <h2>Kuis Virtual Tour</h2>
+        <p>
+          Kuis ini membantu siswa mengecek pemahaman setelah menjelajahi semua titik tour.
+        </p>
+      </div>
+
+      <div class="vt-quiz-grid">
+        <article class="vt-quiz-card" data-answer="a">
+          <h3>1. Sungai bagi masyarakat Banjar dapat berfungsi sebagai...</h3>
+          <button class="vt-option" data-value="a">ruang hidup, transportasi, dan kegiatan ekonomi</button>
+          <button class="vt-option" data-value="b">tempat yang tidak boleh dimanfaatkan</button>
+          <button class="vt-option" data-value="c">wilayah yang tidak berhubungan dengan masyarakat</button>
+          <div class="vt-result"></div>
+        </article>
+
+        <article class="vt-quiz-card" data-answer="b">
+          <h3>2. Perahu disebut teknologi lokal karena...</h3>
+          <button class="vt-option" data-value="a">hanya digunakan sebagai pajangan</button>
+          <button class="vt-option" data-value="b">dibuat sesuai kebutuhan masyarakat sungai</button>
+          <button class="vt-option" data-value="c">tidak memiliki fungsi</button>
+          <div class="vt-result"></div>
+        </article>
+
+        <article class="vt-quiz-card" data-answer="c">
+          <h3>3. Rumah panggung Banjar menunjukkan hubungan antara...</h3>
+          <button class="vt-option" data-value="a">game dan internet</button>
+          <button class="vt-option" data-value="b">warna bangunan dan musik</button>
+          <button class="vt-option" data-value="c">budaya dan kondisi lingkungan</button>
+          <div class="vt-result"></div>
+        </article>
+
+        <article class="vt-quiz-card" data-answer="a">
+          <h3>4. Pertanian pasang surut disebut adaptasi karena...</h3>
+          <button class="vt-option" data-value="a">petani menyesuaikan cara bertani dengan kondisi air</button>
+          <button class="vt-option" data-value="b">petani tidak membutuhkan alam</button>
+          <button class="vt-option" data-value="c">padi hanya tumbuh di jalan raya</button>
+          <div class="vt-result"></div>
+        </article>
+
+        <article class="vt-quiz-card" data-answer="b">
+          <h3>5. Kesimpulan utama dari virtual tour ini adalah...</h3>
+          <button class="vt-option" data-value="a">budaya tidak berkaitan dengan lingkungan</button>
+          <button class="vt-option" data-value="b">lingkungan memengaruhi budaya, teknologi, dan ekonomi masyarakat</button>
+          <button class="vt-option" data-value="c">ekonomi tidak berhubungan dengan masyarakat</button>
+          <div class="vt-result"></div>
+        </article>
+
+        <article class="vt-quiz-card" data-answer="c">
+          <h3>6. Sikap yang tepat setelah mempelajari kearifan lokal adalah...</h3>
+          <button class="vt-option" data-value="a">mengabaikan budaya daerah</button>
+          <button class="vt-option" data-value="b">merusak lingkungan sekitar</button>
+          <button class="vt-option" data-value="c">menghargai budaya lokal dan menjaga lingkungan</button>
+          <div class="vt-result"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section">
+    <div class="vt-container">
+      <div class="vt-reflection">
+        <div>
+          <h2>Refleksi Tour</h2>
+          <p>
+            Setelah menjelajahi empat titik, siswa diminta menyimpulkan hubungan antara budaya,
+            lingkungan, teknologi lokal, dan kegiatan ekonomi masyarakat Banjar.
+          </p>
+        </div>
+
+        <ol>
+          <li>Materi mana yang paling menarik? Jelaskan alasannya.</li>
+          <li>Apa hubungan antara sungai, perahu, rumah adat, dan pertanian?</li>
+          <li>Bagaimana lingkungan sungai memengaruhi kehidupan masyarakat Banjar?</li>
+          <li>Apa contoh kearifan lokal yang kamu temukan?</li>
+          <li>Apa tindakan sederhana untuk menjaga budaya dan lingkungan sekitar?</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="vt-section">
+    <div class="vt-container">
+      <div class="vt-section-title">
+        <h2>Proyek Mini</h2>
+        <p>
+          Pilih salah satu proyek untuk memperkuat pemahaman setelah melakukan virtual tour.
+        </p>
+      </div>
+
+      <div class="vt-projects">
+        <article class="vt-project-card">
+          <h3>Peta Konsep Tour</h3>
+          <p>Buat peta konsep yang menghubungkan sungai, perahu, rumah adat, dan pertanian.</p>
+          <ol>
+            <li>Tulis empat topik utama.</li>
+            <li>Tambahkan kata kunci setiap topik.</li>
+            <li>Hubungkan dengan garis atau panah.</li>
+            <li>Tulis kesimpulan singkat.</li>
+          </ol>
+        </article>
+
+        <article class="vt-project-card">
+          <h3>Poster Kearifan Lokal</h3>
+          <p>Buat poster tentang pentingnya menjaga budaya dan lingkungan Banjar.</p>
+          <ol>
+            <li>Pilih satu tema utama.</li>
+            <li>Tambahkan gambar atau ilustrasi.</li>
+            <li>Tulis tiga pesan utama.</li>
+            <li>Presentasikan di kelas.</li>
+          </ol>
+        </article>
+
+        <article class="vt-project-card">
+          <h3>Cerita Jelajah</h3>
+          <p>Tulis cerita singkat seolah-olah kamu sedang mengunjungi empat lokasi tour.</p>
+          <ol>
+            <li>Mulai dari sungai.</li>
+            <li>Lanjutkan ke perahu dan rumah adat.</li>
+            <li>Akhiri di pertanian lahan pasang surut.</li>
+            <li>Tulis pelajaran yang diperoleh.</li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="vt-footer-cta">
+  <div class="vt-container vt-footer-flex">
+    <div>
+      <h2>Virtual Tour ETNOLIT</h2>
+      <p>
+        Jelajah budaya Banjar untuk memahami hubungan antara lingkungan, teknologi lokal,
+        kehidupan sosial, dan kegiatan ekonomi masyarakat.
+      </p>
+    </div>
+
+    <a class="vt-btn primary" href="index.html">Kembali ke Beranda</a>
+  </div>
+</section>
+
+<footer class="vt-footer">
+  <div class="vt-container">
+    <div>© <span id="year"></span> ETNOLIT | Aplikasi Pembelajaran IPS SMP</div>
+    <div>Virtual Tour • Sungai • Perahu • Rumah Adat • Pertanian</div>
+  </div>
+</footer>
+
+<script>
+  const stops = [
+    {
+      badge: "Stop 1",
+      title: "Aktivitas Kehidupan Sungai",
+      image: "assets/sungai/sungai_04.jpeg",
+      desc: "Sungai menjadi ruang hidup masyarakat Banjar. Di sekitar sungai, masyarakat dapat melakukan aktivitas sosial, ekonomi, transportasi, dan interaksi antarruang.",
+      info: "Amati fungsi sungai dalam kehidupan masyarakat. Sungai dapat menjadi jalur transportasi, tempat interaksi sosial, sumber daya perairan, dan ruang kegiatan ekonomi.",
+      tags: ["sungai", "konektivitas", "aktivitas sosial", "ekonomi"],
+      questions: [
+        "Apa saja aktivitas masyarakat di sekitar sungai?",
+        "Mengapa sungai dapat disebut jalur konektivitas?",
+        "Apa dampaknya jika sungai tercemar?"
+      ]
+    },
+    {
+      badge: "Stop 2",
+      title: "Perahu Tradisional Banjar",
+      image: "assets/perahu/perahu_16.jpg",
+      desc: "Perahu tradisional menjadi teknologi lokal masyarakat sungai. Perahu digunakan untuk berpindah tempat, mengangkut barang, berdagang, dan menghubungkan wilayah.",
+      info: "Amati bentuk dan fungsi perahu. Perahu menunjukkan cara masyarakat menyesuaikan alat transportasi dengan lingkungan sungai.",
+      tags: ["perahu", "teknologi lokal", "transportasi", "distribusi"],
+      questions: [
+        "Mengapa perahu disebut teknologi lokal?",
+        "Bagaimana perahu membantu perdagangan?",
+        "Apa hubungan sungai, perahu, dan distribusi barang?"
+      ]
+    },
+    {
+      badge: "Stop 3",
+      title: "Rumah Adat Banjar",
+      image: "assets/rumah/rumah_30.jpg",
+      desc: "Rumah adat Banjar menunjukkan keragaman budaya dan adaptasi masyarakat terhadap lingkungan sungai, rawa, dan lahan basah.",
+      info: "Amati ciri rumah panggung. Bentuk rumah dapat menunjukkan pengetahuan lokal masyarakat dalam menyesuaikan diri dengan alam.",
+      tags: ["rumah adat", "rumah panggung", "adaptasi", "budaya"],
+      questions: [
+        "Mengapa rumah panggung cocok untuk wilayah dekat sungai?",
+        "Bagian rumah apa yang menunjukkan nilai budaya?",
+        "Mengapa rumah adat perlu dilestarikan?"
+      ]
+    },
+    {
+      badge: "Stop 4",
+      title: "Pertanian Lahan Pasang Surut",
+      image: "assets/pertanian/pertanian_11.jpg",
+      desc: "Pertanian lahan pasang surut menunjukkan kemampuan petani menyesuaikan cara bertani dengan kondisi air, tanah, dan lingkungan.",
+      info: "Amati kegiatan pertanian pada lahan basah. Petani perlu memahami kondisi air agar dapat menentukan waktu tanam dan cara mengolah lahan.",
+      tags: ["pertanian", "pasang surut", "adaptasi", "ekonomi lokal"],
+      questions: [
+        "Mengapa petani perlu memahami pasang surut air?",
+        "Apa contoh adaptasi petani terhadap lingkungan?",
+        "Bagaimana hasil panen masuk ke kegiatan ekonomi?"
+      ]
+    }
+  ];
+
+  let currentStop = 0;
+
+  const tourImage = document.getElementById("tourImage");
+  const tourBadge = document.getElementById("tourBadge");
+  const tourTitle = document.getElementById("tourTitle");
+  const tourDesc = document.getElementById("tourDesc");
+  const tourTags = document.getElementById("tourTags");
+  const infoText = document.getElementById("infoText");
+  const tourQuestions = document.getElementById("tourQuestions");
+  const stopButtons = document.querySelectorAll(".vt-stop-btn");
+
+  function renderStop(index){
+    currentStop = index;
+    const stop = stops[index];
+
+    tourImage.style.backgroundImage = `url('${stop.image}')`;
+    tourBadge.textContent = stop.badge;
+    tourTitle.textContent = stop.title;
+    tourDesc.textContent = stop.desc;
+    infoText.textContent = stop.info;
+
+    tourTags.innerHTML = stop.tags.map(tag => `<span class="vt-tag">${tag}</span>`).join("");
+    tourQuestions.innerHTML = stop.questions.map(q => `<li>${q}</li>`).join("");
+
+    stopButtons.forEach(btn => {
+      btn.classList.toggle("active", Number(btn.dataset.stop) === index);
+    });
+  }
+
+  stopButtons.forEach(btn => {
+    btn.addEventListener("click", () => renderStop(Number(btn.dataset.stop)));
+  });
+
+  document.querySelectorAll("[data-map]").forEach(pin => {
+    pin.addEventListener("click", () => renderStop(Number(pin.dataset.map)));
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    renderStop((currentStop + 1) % stops.length);
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    renderStop((currentStop - 1 + stops.length) % stops.length);
+  });
+
+  document.querySelectorAll(".vt-hotspot").forEach(hotspot => {
+    hotspot.addEventListener("click", () => {
+      alert("Titik pengamatan: bacalah pertanyaan di panel kanan, lalu tulis hasil pengamatanmu di buku catatan.");
+    });
+  });
+
+  document.querySelectorAll(".vt-quiz-card").forEach(card => {
+    const answer = card.dataset.answer;
+    const result = card.querySelector(".vt-result");
+    const options = card.querySelectorAll(".vt-option");
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        options.forEach(o => {
+          o.classList.remove("correct", "wrong");
+          o.disabled = true;
+        });
+
+        if(option.dataset.value === answer){
+          option.classList.add("correct");
+          result.textContent = "Benar! Jawabanmu sesuai dengan materi virtual tour.";
+          result.style.color = "#1e6b43";
+        } else {
+          option.classList.add("wrong");
+          const correct = card.querySelector(`[data-value="${answer}"]`);
+          correct.classList.add("correct");
+          result.textContent = "Belum tepat. Perhatikan kembali materi pada titik tour.";
+          result.style.color = "#9c2b2b";
+        }
+      });
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
